@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 420" role="img" aria-labelledby="title desc">
+  <title id="title">Gestor de Reservas de Espaços</title>
+  <desc id="desc">Logótipo azul escuro com visto turquesa e o nome Gestor de Reservas de Espaços.</desc>
+  <rect width="1260" height="420" fill="#ffffff"/>
+  <path d="M158 286H122c-26 0-44-18-44-44V153c0-26 18-44 44-44h94c26 0 44 18 44 44v48" fill="none" stroke="#09263e" stroke-linecap="round" stroke-linejoin="round" stroke-width="23"/>
+  <path d="m180 252 34 34 70-72" fill="none" stroke="#16c2b0" stroke-linecap="round" stroke-linejoin="round" stroke-width="23"/>
+  <text x="360" y="190" fill="#09263e" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">Gestor de Reservas</text>
+  <text x="360" y="260" fill="#09263e" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">de Espaços</text>
+</svg>
