@@ -4,6 +4,7 @@ import Image from "next/image";
 const container = "mx-auto w-full max-w-[1160px] px-5 sm:px-8";
 const mono = "font-mono text-[10px] uppercase tracking-[0.04em]";
 const button = "inline-flex items-center gap-2 rounded border border-[var(--border)] px-4 py-3 font-mono text-[11px]";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 // Single-page composition: navigation, presentation, work, experience and contact.
 export default function Home() {
@@ -11,11 +12,11 @@ export default function Home() {
     <div className="overflow-hidden">
       {/* Fixed-height header gives every section a stable navigation entry point. */}
       <header className={`${container} flex h-[4.5rem] items-center justify-between border-b border-[var(--border)]`}>
-        <a className="flex items-center gap-2.5 text-xs font-semibold" href="#top" aria-label="Guilherme Gomes, início">
+        <a className="flex items-center gap-2.5 text-xs font-semibold" href="#top" aria-label="Guilherme Gomes, home">
           <span className="font-mono text-base font-semibold text-[var(--accent)]">g.g</span>
           <span>Guilherme Gomes</span>
         </a>
-        <nav aria-label="Navegação principal">
+        <nav aria-label="Main navigation">
           <ul className="flex items-center gap-3 sm:gap-7">
             <li className="hidden sm:block"><a className={`${mono} text-[var(--muted)] hover:text-[var(--foreground)]`} href="#expertise">Expertise</a></li>
             <li className="hidden sm:block"><a className={`${mono} text-[var(--muted)] hover:text-[var(--foreground)]`} href="#work">Work</a></li>
@@ -32,11 +33,14 @@ export default function Home() {
             <h1 className="max-w-[11ch] text-[clamp(2.75rem,6vw,5.25rem)] font-medium leading-[.98] tracking-[-.07em]" id="hero-title">Hello, My name is Guilherme Gomes</h1>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className={`${button} border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-ink)]`} href="#work">Explore my work <span aria-hidden="true">↓</span></a>
-              <a className={`${button} bg-[var(--surface)]`} href="/resume.pdf">View résumé <span aria-hidden="true">↓</span></a>
+              <a className={`${button} bg-[var(--surface)]`} href={`${basePath}/resume.pdf`}>View résumé <span aria-hidden="true">↓</span></a>
             </div>
           </div>
-          <div className="relative aspect-square min-h-72 overflow-hidden rounded bg-[linear-gradient(145deg,#f7f7fa_0%,#a5a5ad_45%,#222228_70%,#111116_100%)]" aria-label="Painel visual do portfólio">
-            <div className="absolute bottom-5 left-5 right-5 rounded border border-[var(--border)] bg-[rgb(17_17_22_/_94%)] p-4 font-mono">
+          <div className="flex flex-col gap-3">
+            <div className="relative aspect-square min-h-72 overflow-hidden rounded bg-[linear-gradient(145deg,#f7f7fa_0%,#a5a5ad_45%,#222228_70%,#111116_100%)]" aria-label="Photo of Guilherme Gomes">
+              <Image src={`${basePath}/eu.jpg`} alt="Guilherme Gomes" fill priority className="object-cover" />
+            </div>
+            <div className="rounded border border-[var(--border)] bg-[rgb(17_17_22_/_94%)] p-4 font-mono">
               <span className="float-right text-[9px] uppercase text-[var(--accent)]">Production</span>
               <span className={`${mono} text-[var(--muted)]`}>~/guilherme / portfolio</span>
               <p className="mt-3 text-[10px] text-[var(--foreground)]">$ build something meaningful</p>
@@ -73,10 +77,25 @@ export default function Home() {
               <p className="mt-4 max-w-xl text-xs leading-6 text-[var(--muted)]">A few sample builds that connect thoughtful design with solid engineering. Each one solves a different kind of problem.</p>
             </div>
             <div className="grid gap-5">
-              <ProjectCard name="Gestor de Espaços ISTEC" copy="Uma plataforma para transformar dados dispersos em decisões mais claras." tags={["Laravel", "PostgreSQL", "Blade"]} imageUrl="/gestor-espacos.svg" sourceUrl="https://github.com/Dev-GuilhermeGomes/Gestor-de-Reservas-de-Espacos-ISTEC" featured />
+              <ProjectCard name="ISTEC Space Manager" status="In development" copy="A platform that turns scattered data into clearer decisions." tags={["Laravel", "PostgreSQL", "Blade"]} imageUrl={`${basePath}/gestor-espacos.svg`} sourceUrl="https://github.com/Dev-GuilhermeGomes/Gestor-de-Reservas-de-Espacos-ISTEC" featured />
               <div className="grid gap-5 md:grid-cols-2">
-                <ProjectCard name="Cora" copy="Experiências digitais simples para equipas que precisam de avançar depressa." tags={["React", "Node.js", "UX", "API"]} />
-                <ProjectCard name="Forma" copy="Sistemas claros para transformar ideias complexas em produtos úteis." tags={["Next.js", "Design", "SQL", "Cloud"]} dark />
+                <ProjectCard
+                  name="ProjetoFinalPWS"
+                  status="Offline · Finished"
+                  copy="Laravel application for managing games organized by studios, with a public studio page and dynamic game counts. Includes authentication, user profiles, a private dashboard, an external MySQL database connection and REST API integration."
+                  tags={["Laravel", "Blade", "MySQL", "API REST"]}
+                  imageUrl={`${basePath}/logo-game-studios-manager.png`}
+                  sourceUrl="https://github.com/Dev-GuilhermeGomes/trabalhoFinal"
+                />
+                <ProjectCard
+                  name="falltobook"
+                  status="Being updated"
+                  copy="Responsive digital library website with a searchable catalog, individual book pages and light/dark mode. The project is still in development."
+                  tags={["React", "TypeScript", "Tailwind CSS", "Vite"]}
+                  imageUrl={`${basePath}/falltobook-cover.svg`}
+                  liveUrl="https://eldoria-1zm.pages.dev/"
+                  sourceUrl="https://github.com/Dev-GuilhermeGomes/Eldoria"
+                />
               </div>
             </div>
           </div>
@@ -87,7 +106,7 @@ export default function Home() {
           <div className={`${container} grid gap-14 lg:grid-cols-[minmax(17rem,.85fr)_minmax(0,1.15fr)]`}>
             <div>
               <p className={`${mono} mb-5 text-[var(--accent)]`}>About Me</p>
-              <div className="mb-7 h-32 w-32 rounded-full bg-[#dedee5] sm:h-36 sm:w-36" aria-label="Fotografia de Guilherme Gomes" role="img" />
+              <Image src={`${basePath}/eu.jpg`} alt="Guilherme Gomes" width={144} height={144} className="mb-7 h-32 w-32 rounded-full object-cover sm:h-36 sm:w-36" />
               <h2 className="max-w-[12ch] text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[.95] tracking-[-.06em]" id="about-title">Guilherme Figueiredo Gomes</h2>
               <div className="mt-5 max-w-md space-y-5 text-xs leading-6 text-[var(--muted)]">
                 <p>I&apos;m a frontend-focused developer who has always been drawn to the visual, interactive side of software and websites. I&apos;m currently studying Software Development at ISTEC Porto, where I work mainly with React, Next.js, Laravel and Blade, and I enjoy picking up new languages and frameworks.</p>
@@ -156,18 +175,17 @@ function InfoCard({ icon, title, copy, stack }: { icon: string; title: string; c
   );
 }
 
-function ProjectCard({ name, copy, tags, dark = false, featured = false, imageUrl, sourceUrl }: { name: string; copy: string; tags: string[]; dark?: boolean; featured?: boolean; imageUrl?: string; sourceUrl?: string }) {
+function ProjectCard({ name, status, copy, tags, dark = false, featured = false, imageUrl, liveUrl, sourceUrl }: { name: string; status: string; copy: string; tags: string[]; dark?: boolean; featured?: boolean; imageUrl?: string; liveUrl?: string; sourceUrl?: string }) {
   // Optional URLs keep cards reusable while allowing each project to expose its own repository.
   return (
     <article className={`overflow-hidden rounded border border-[var(--border)] bg-[var(--surface)] ${featured ? "md:grid md:grid-cols-[.8fr_1.2fr]" : ""}`}>
       <div className={`flex min-h-60 items-center overflow-hidden font-mono text-3xl ${imageUrl ? "bg-white" : `p-6 ${dark ? "bg-[#171320] text-[var(--accent)]" : "bg-[#dedee5] text-[#111116]"}`} ${featured ? "md:order-2 md:min-h-full" : ""}`}>
-        {imageUrl ? <Image src={imageUrl} alt={`Imagem do projeto ${name}`} width={1260} height={420} className="h-full w-full object-contain" /> : name.toLowerCase()}
+        {imageUrl ? <Image src={imageUrl} alt={`Project image for ${name}`} width={1260} height={420} className="h-full w-full object-contain" /> : name.toLowerCase()}
       </div>
       <div className={`p-5 sm:p-6 ${featured ? "md:order-1" : ""}`}>
-        <p className={`${mono} mb-4 text-[var(--accent)]`}>genres</p>
+        <p className={`${mono} mb-4 text-[var(--accent)]`}>{status}</p>
         <h3 className="text-xl font-medium">{name}</h3>
         <p className="mt-4 text-xs leading-7 text-[var(--muted)]">{copy}</p>
-        <p className="mt-2 text-xs leading-7 text-[var(--muted)]">Built with care from first idea to final delivery.</p>
         <ul className="mt-5 flex flex-wrap gap-2">
           {tags.map((tag) => (
             <li className="border border-[var(--border)] px-2 py-1 font-mono text-[9px] text-[var(--subtle)]" key={tag}>
@@ -176,7 +194,7 @@ function ProjectCard({ name, copy, tags, dark = false, featured = false, imageUr
           ))}
         </ul>
         <div className="mt-6 flex gap-5 text-xs font-medium">
-          <a className="text-[var(--foreground)] hover:text-[var(--accent)]" href="#contact">Live demo ↗</a>
+          <a className="text-[var(--foreground)] hover:text-[var(--accent)]" href={liveUrl ?? "#contact"} target={liveUrl ? "_blank" : undefined} rel={liveUrl ? "noreferrer" : undefined}>Live demo ↗</a>
           <a className="text-[var(--foreground)] hover:text-[var(--accent)]" href={sourceUrl ?? "#contact"} target={sourceUrl ? "_blank" : undefined} rel={sourceUrl ? "noreferrer" : undefined}>Source code ↗</a>
         </div>
       </div>
